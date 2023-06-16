@@ -1,52 +1,70 @@
-const grossIncome =90000//prompt("Enter Your Gros salary");
+const grossIncome = prompt("Enter Your Gros salary");
 
+//Netsalary calculator,calculates the netSalary of an individual ,recieves 4 parameter which are function we passed to it,
 
+function NetSalaryCalculator(grossIncome, NHIFrangePicker, TotalTaxCalculator) {
+  //function recieves 2 variables to calculate the net
 
-
-//Netsalary calculator
-function NetSalaryCalculator(grossIncome, NHIFrangePicker,TotalTaxCalculator,PayeCalculator) { //function recieves 2 variables to calculate the net
-  
-  let NHIFpicker = NHIFrangePicker(grossIncome);
-  totalTax = TotalTaxCalculator(grossIncome, NHIFpicker);
-  let netSalary = grossIncome - totalTax[0];
-  console.log(`Gross Income: ${grossIncome},\nNHIF: ${NHIFpicker},\nNSSHF: ${totalTax[1]},\nPAYE: ${totalTax[2]},\nTotal tax : ${totalTax[0]} `);
-  return `net salary: ${netSalary}`;
+  let NHIFpicker = NHIFrangePicker(grossIncome); //declares a variable NHIFpicker and assignes a value returned by the  funciton NHIFrangePicker, after
+  //being ivoked and passed the grossIncome variable
+  totalTax = TotalTaxCalculator(grossIncome, NHIFpicker); //assignes a value of  to the variable 'totalTax' which is an array  returned by the function TotalTaxCalculator
+  //the TotalTaxCalculator functino recieves two parameters, calculated the total tax anf then returns the value
+  let netSalary = grossIncome - totalTax[0]; //declares a variable netSalary, then subtracts the grossInocme from the second elemt of the array returned by
+  //the function TotalTaxCalculator, which is assigned to the variable totalTax, to give us the netSalary of an individual
+  console.log(
+    `Gross Income: ${grossIncome},\nNHIF: ${NHIFpicker},\nNSSHF: ${totalTax[1]},\nPAYE: ${totalTax[2]},\nTotal tax : ${totalTax[0]} `
+  );
+  //above line prints  the variables inside, to the console or terminal so we can view and see them,
+  return `net salary: ${netSalary}`; //return the variable netSalary
 }
 
-console.log(NetSalaryCalculator(grossIncome,  NHIFrangePicker, TotalTaxCalculator));
-
-
-
+console.log(
+  NetSalaryCalculator(grossIncome, NHIFrangePicker, TotalTaxCalculator)
+); //prints the results return by the NetSalaryCalculator function
 
 //CALCULATES the total tax paid by an individual
+/**
+ * TotalTaxCalculator functino calculates the totals tax paid by an individual, it recieves two parameters
+ * "grossIncome" and "NHIF" which are passed form the function above
+ *
+ */
 function TotalTaxCalculator(grossIncome, NHIF) {
-  let NSSF = 1080; 
+  let NSSF = 1080; //declaring a variable NSSF and assigning the value of 1080
   let taxableIncome = grossIncome - NSSF; //removing NSSF from the grossIncome
-  let PAYE = PayeCalculator(taxableIncome); //capturing what the payeCalculator returns in variable for late use
+  let PAYE = PayeCalculator(taxableIncome); //capturing what the payeCalculator(a functin defined blow) returns in variable for later use
   let totalTax = PAYE + NHIF; //calculating the total tax
-  return [totalTax,NSSF,PAYE];
+  return [totalTax, NSSF, PAYE]; //return an array of those three value
 }
 
-
 //Calculates the PAYE
+/**the fucntino "PayeCalculator" below, calculates the PAYE of an individual, it accepts the parameter "taxableIncom" which is passed from
+ * the TotalTaxCalculator function, it checks where the taxable income falls and depending on the range it falls, it calculates the tax using
+ * the tax rates provided in this link (https://www.aren.co.ke/payroll/taxrates.htm),
+ */
 function PayeCalculator(taxableIncome) {
   let tax;
+  //the if blocks below checks if the taxableIncome falls between 0 and 24000, if yess, it does the calcualtion  and returns that value so we can export it outside the funcitno
   if (taxableIncome > 0 && taxableIncome <= 24000) {
     return taxableIncome * 0.1;
   } else if (taxableIncome > 24000 && taxableIncome <= 32333) {
-    tax = (24000 - 0) * 0.1 + (taxableIncome - 24000) * 0.25;
-    return tax;
+    //if the condition above is false, check  if it falls between 24000  and 32333
+    tax = (24000 - 0) * 0.1 + (taxableIncome - 24000) * 0.25; // if yess, do the calculation and store it the variable tax we decalared above
+    return tax; //return the tax variable to be used outside the fucntion
   } else if (taxableIncome > 32333) {
+    // if the two previous condition are false
     tax =
       (24000 - 0) * 0.1 +
       (32333 - 24000) * 0.25 +
       (taxableIncome - 32333) * 0.3;
-    return tax;
+    //if this condition is true, do the calculations above and store them in the tax variable
+    return tax; //then return the variable for later use
   }
 }
 
-
 //chooses the NHIF range where a an idvidual salary falls
+/**the function below recieves a parameter "grossIncome" which is entered by the user when prompted and then runs it through the
+ * if statement to find which range it falls and then pick the return value that specifit "if block" return
+ */
 function NHIFrangePicker(grossIncome) {
   let NHIF;
   if (grossIncome > 0 && grossIncome <= 5999) {
