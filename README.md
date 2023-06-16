@@ -1,58 +1,33 @@
 # phas1-week1-challenge
-
 # Repository
 
-## PROJECT 1 Titles
+## SPEED DETECTOR
 
-SPEED DETECTOR
 
 ## Description
-
 The code in the file gradeCalcultor.js implements a speed detector program.
-where a if the driver speed is below 70, it is ok and allowd, but if it's
-mor than 70km/h, it adds a demerit point for every 5km/h above 70, and prints
+where a if the driver speed is below 70, it is ok and allowd, but if it's 
+mor than 70km/h, it adds a demerit point for every 5km/h above 70, and prints 
 points, if the points bocome more than 12, the driver licience is suspended
 
-## Project Setup
 
-To use this program, follow the instructions below:
 
-1. Clone the repository to your local machine.
-2. Open the code files in your preferred code editor.
-3. Run the code and enter the driver's current speed when prompted
 
-## PROJECT 2 TITLE
-
-GRADE CALCULATOR
+## GRADE CALCULATOR
 
 ## Describtion
-
 The code uses conditional statements and a switch case to determine the grade based on the input value. It checks if the grade is within the valid range (0 to 100) and assigns the appropriate grade label ("A", "B", "C", "D", or "E") based on specific conditions. If the grade is not within the valid range, an error message is displayed.
 
-## Project Setup
 
-To use this program, follow the instructions below:
 
-1. Clone the repository to your local machine.
-2. Open the code files in your preferred code editor.
-3. Run the code and enter the driver's current speed when prompted.
+## NETSALARY CALCULATOR
 
-## PROJECT 3 TITLE
 
-NET SALARY CALCULATOR
-
-## Describtion
-
+## Describtion 
 The code defines several functions to calculate various aspects of the net salary calculation. The NetSalaryCalculator function takes the gross income as input and calls the NHIFrangePicker and TotalTaxCalculator functions to determine the NHIF deduction and total tax. It then subtracts the total tax from
 
-## Project Setup
 
-To use this program, follow the instructions below:
-
-1. Clone the repository to your local machine.
-2. Open the code files in your preferred code editor.
-3. Run the code and enter the driver's current speed when prompted.
 
 ## Author & License
 
-This code was written by [Abdiwadud Daud]. It is released under the [Bisinle] license.
+This code was written by [Abdiwadud Mohamed]. It is released under the [Bisinle] license.
