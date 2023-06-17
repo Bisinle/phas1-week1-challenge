@@ -40,4 +40,4 @@ To set up the project, follow these steps:
 
 ## Author & License
 
-This code was written by [Abdiwadud Mohamed]. It is released under the [Bisinle] license.
+This code was written by `Abdiwadud Mohamed`. It is released under the `Bisinle` license.
