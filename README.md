@@ -26,6 +26,16 @@ The code uses conditional statements and a switch case to determine the grade ba
 ## Describtion 
 The code defines several functions to calculate various aspects of the net salary calculation. The NetSalaryCalculator function takes the gross income as input and calls the NHIFrangePicker and TotalTaxCalculator functions to determine the NHIF deduction and total tax. It then subtracts the total tax from
 
+## Project Setup
+
+To set up the project, follow these steps:
+
+1. Clone the repository to your local machine.
+2. Open the `any of the  project files  `  in your preferred code editor.
+4. Customize the script by modifying the variables, functions, or logic to suit your requirements.
+5. Save the changes made to the `file you edited` .
+6. Run the JavaScript file using a JavaScript runtime environment or by embedding it in an HTML file.
+7. Test and verify the functionality of the script.
 
 
 ## Author & License
