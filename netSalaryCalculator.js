@@ -1,4 +1,4 @@
-const grossIncome = prompt("Enter Your Gros salary");
+const grossIncome = 90000; //prompt("Enter Your Gros salary");
 
 //Netsalary calculator,calculates the netSalary of an individual ,recieves 4 parameter which are function we passed to it,
 
@@ -7,8 +7,14 @@ function NetSalaryCalculator(grossIncome, NHIFrangePicker, TotalTaxCalculator) {
 
   let NHIFpicker = NHIFrangePicker(grossIncome); //declares a variable NHIFpicker and assignes a value returned by the  funciton NHIFrangePicker, after
   //being ivoked and passed the grossIncome variable
-  totalTax = TotalTaxCalculator(grossIncome, NHIFpicker); //assignes a value of  to the variable 'totalTax' which is an array  returned by the function TotalTaxCalculator
-  //the TotalTaxCalculator functino recieves two parameters, calculated the total tax anf then returns the value
+  if (grossIncome < NHIFpicker) {
+    NHIFpicker = 0;
+    totalTax = TotalTaxCalculator(grossIncome, NHIFpicker); //assignes a value of  to the variable 'totalTax' which is an array  returned by the function TotalTaxCalculator
+  } else {
+    totalTax = TotalTaxCalculator(grossIncome, NHIFpicker); //assignes a value of  to the variable 'totalTax' which is an array  returned by the function TotalTaxCalculator
+    //the TotalTaxCalculator functino recieves two parameters, calculated the total tax anf then returns the value
+  }
+
   let netSalary = grossIncome - totalTax[0]; //declares a variable netSalary, then subtracts the grossInocme from the second elemt of the array returned by
   //the function TotalTaxCalculator, which is assigned to the variable totalTax, to give us the netSalary of an individual
   console.log(
@@ -29,9 +35,11 @@ console.log(
  *
  */
 function TotalTaxCalculator(grossIncome, NHIF) {
+  let personalReleif = 2400;
   let NSSF = 1080; //declaring a variable NSSF and assigning the value of 1080
   let taxableIncome = grossIncome - NSSF; //removing NSSF from the grossIncome
-  let PAYE = PayeCalculator(taxableIncome); //capturing what the payeCalculator(a functin defined blow) returns in variable for later use
+  let PAYE = PayeCalculator(taxableIncome, personalReleif); //capturing what the payeCalculator(a functin defined blow) returns in variable for later use
+
   let totalTax = PAYE + NHIF; //calculating the total tax
   return [totalTax, NSSF, PAYE]; //return an array of those three value
 }
@@ -41,23 +49,29 @@ function TotalTaxCalculator(grossIncome, NHIF) {
  * the TotalTaxCalculator function, it checks where the taxable income falls and depending on the range it falls, it calculates the tax using
  * the tax rates provided in this link (https://www.aren.co.ke/payroll/taxrates.htm),
  */
-function PayeCalculator(taxableIncome) {
+function PayeCalculator(taxableIncome, personalReleif) {
   let tax;
   //the if blocks below checks if the taxableIncome falls between 0 and 24000, if yess, it does the calcualtion  and returns that value so we can export it outside the funcitno
-  if (taxableIncome > 0 && taxableIncome <= 24000) {
-    return taxableIncome * 0.1;
-  } else if (taxableIncome > 24000 && taxableIncome <= 32333) {
-    //if the condition above is false, check  if it falls between 24000  and 32333
-    tax = (24000 - 0) * 0.1 + (taxableIncome - 24000) * 0.25; // if yess, do the calculation and store it the variable tax we decalared above
-    return tax; //return the tax variable to be used outside the fucntion
-  } else if (taxableIncome > 32333) {
-    // if the two previous condition are false
-    tax =
-      (24000 - 0) * 0.1 +
-      (32333 - 24000) * 0.25 +
-      (taxableIncome - 32333) * 0.3;
-    //if this condition is true, do the calculations above and store them in the tax variable
-    return tax; //then return the variable for later use
+  if (taxableIncome > personalReleif) {
+    //this if block tests if the texableIcome is more than the personal releif, it can only pass if that is the case
+    if (taxableIncome > 0 && taxableIncome <= 24000) {
+      return taxableIncome * 0.1;
+    } else if (taxableIncome > 24000 && taxableIncome <= 32333) {
+      //if the condition above is false, check  if it falls between 24000  and 32333
+      tax = (24000 - 0) * 0.1 + (taxableIncome - 24000) * 0.25; // if yess, do the calculation and store it the variable tax we decalared above
+      return tax; //return the tax variable to be used outside the fucntion
+    } else if (taxableIncome > 32333) {
+      // if the two previous condition are false
+      tax =
+        (24000 - 0) * 0.1 +
+        (32333 - 24000) * 0.25 +
+        (taxableIncome - 32333) * 0.3;
+      //if this condition is true, do the calculations above and store them in the tax variable
+      return tax; //then return the variable for later use
+    }
+  } else {
+    // if the taxableIcome is less or equals to the personalreleif, an indivdual should not pay any tax because the personalReleif is always deducted from the tax
+    return 0;
   }
 }
 
