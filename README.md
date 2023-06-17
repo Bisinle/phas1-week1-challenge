@@ -6,9 +6,9 @@
 
 ## Description
 The code in the file gradeCalcultor.js implements a speed detector program.
-where a if the driver speed is below 70, it is ok and allowd, but if it's 
+where a if the driver speed is below 70, it is ok and allowed, but if it's 
 mor than 70km/h, it adds a demerit point for every 5km/h above 70, and prints 
-points, if the points bocome more than 12, the driver licience is suspended
+the points, if the points bocome more than 12, the driver licience is suspended
 
 
 
@@ -24,7 +24,7 @@ The code uses conditional statements and a switch case to determine the grade ba
 
 
 ## Describtion 
-The code defines several functions to calculate various aspects of the net salary calculation. The NetSalaryCalculator function takes the gross income as input and calls the NHIFrangePicker and TotalTaxCalculator functions to determine the NHIF deduction and total tax. It then subtracts the total tax from
+The code defines several functions to calculate various aspects of the net salary calculation. The NetSalaryCalculator function takes the gross income as input and calls the NHIFrangePicker and TotalTaxCalculator functions to determine the NHIF deduction and total tax. It then subtracts the total tax from from the netSalary and prints the results
 
 ## Project Setup
 
