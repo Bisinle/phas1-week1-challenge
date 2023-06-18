@@ -1,31 +1,33 @@
-const grossIncome = 90000; //prompt("Enter Your Gros salary");
+const grossIncome = 10000; //prompt("Enter Your Gros salary");
 
 //Netsalary calculator,calculates the netSalary of an individual ,recieves 4 parameter which are function we passed to it,
 
-function NetSalaryCalculator(grossIncome, NHIFrangePicker, TotalTaxCalculator) {
+function NetSalaryCalculator(grossIncome,NHIFrangePicker,TotalTaxCalculator,NSSFCalculator) {
   //function recieves 2 variables to calculate the net
-
+  let NSSF = NSSFCalculator(grossIncome)
   let NHIFpicker = NHIFrangePicker(grossIncome); //declares a variable NHIFpicker and assignes a value returned by the  funciton NHIFrangePicker, after
   //being ivoked and passed the grossIncome variable
   if (grossIncome < NHIFpicker) {
     NHIFpicker = 0;
-    totalTax = TotalTaxCalculator(grossIncome, NHIFpicker); //assignes a value of  to the variable 'totalTax' which is an array  returned by the function TotalTaxCalculator
+    totalTax = TotalTaxCalculator(grossIncome, NHIFpicker,NSSF); //assignes a value of  to the variable 'totalTax' which is an array  returned by the function TotalTaxCalculator
   } else {
-    totalTax = TotalTaxCalculator(grossIncome, NHIFpicker); //assignes a value of  to the variable 'totalTax' which is an array  returned by the function TotalTaxCalculator
+    totalTax = TotalTaxCalculator(grossIncome, NHIFpicker,NSSF); //assignes a value of  to the variable 'totalTax' which is an array  returned by the function TotalTaxCalculator
     //the TotalTaxCalculator functino recieves two parameters, calculated the total tax anf then returns the value
   }
+  let taxableIcome = totalTax[3]
+  let TotalActualTax = totalTax[0]
 
-  let netSalary = grossIncome - totalTax[0]; //declares a variable netSalary, then subtracts the grossInocme from the second elemt of the array returned by
+  let netSalary = taxableIcome - TotalActualTax; //declares a variable netSalary, then subtracts the grossInocme from the second elemt of the array returned by
   //the function TotalTaxCalculator, which is assigned to the variable totalTax, to give us the netSalary of an individual
   console.log(
-    `Gross Income: ${grossIncome},\nNHIF: ${NHIFpicker},\nNSSHF: ${totalTax[1]},\nPAYE: ${totalTax[2]},\nTotal tax : ${totalTax[0]} `
+    `Gross Income: ${grossIncome},\nNSSF: ${totalTax[1]},\nTaxable Income: ${totalTax[3]} ,\nNHIF: ${NHIFpicker},\nPAYE: ${totalTax[2]},\nTotal tax : ${totalTax[0]} `
   );
   //above line prints  the variables inside, to the console or terminal so we can view and see them,
   return `net salary: ${netSalary}`; //return the variable netSalary
 }
 
 console.log(
-  NetSalaryCalculator(grossIncome, NHIFrangePicker, TotalTaxCalculator)
+  NetSalaryCalculator(grossIncome,NHIFrangePicker,TotalTaxCalculator,NSSFCalculator)
 ); //prints the results return by the NetSalaryCalculator function
 
 //CALCULATES the total tax paid by an individual
@@ -34,14 +36,13 @@ console.log(
  * "grossIncome" and "NHIF" which are passed form the function above
  *
  */
-function TotalTaxCalculator(grossIncome, NHIF) {
+function TotalTaxCalculator(grossIncome, NHIF, NSSF) {
   let personalReleif = 2400;
-  let NSSF = 1080; //declaring a variable NSSF and assigning the value of 1080
   let taxableIncome = grossIncome - NSSF; //removing NSSF from the grossIncome
   let PAYE = PayeCalculator(taxableIncome, personalReleif); //capturing what the payeCalculator(a functin defined blow) returns in variable for later use
 
   let totalTax = PAYE + NHIF; //calculating the total tax
-  return [totalTax, NSSF, PAYE]; //return an array of those three value
+  return [totalTax, NSSF, PAYE,taxableIncome]; //return an array of those three value
 }
 
 //Calculates the PAYE
@@ -133,4 +134,26 @@ function NHIFrangePicker(grossIncome) {
     NHIF = 1700;
     return NHIF;
   }
+}
+
+function NSSFCalculator(grossIncome) {
+  let NSSF;
+  //the if blocks below checks if the taxableIncome falls between 0 and 24000, if yess, it does the calcualtion  and returns that value so we can export it outside the funcitno
+    //this if block tests if the texableIcome is more than the personal releif, it can only pass if that is the case
+    if (grossIncome > 0 && grossIncome <= 6000) {
+      return grossIncome * 0.06;
+    } else if (grossIncome > 6000 && grossIncome <= 18000) {
+      //if the condition above is false, check  if it falls between 24000  and 32333
+      NSSF = (6000 - 0) * 0.06 + (grossIncome - 6000) * 0.06; // if yess, do the calculation and store it the variable tax we decalared above
+      return NSSF; //return the tax variable to be used outside the fucntion
+    } else if (grossIncome > 18000) {
+      // if the two previous condition are false
+      NSSF =
+        (6000 - 0) * 0.06 +
+        (18000 - 6000) * 0.06 +
+        (grossIncome - 18000) * 0.06;
+      //if this condition is true, do the calculations above and store them in the tax variable
+      return NSSF; //then return the variable for later use
+    }
+  console.log("ffffffffffffffffffffffffffffffffffff"+NSSF);
 }
