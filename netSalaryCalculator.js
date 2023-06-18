@@ -1,4 +1,4 @@
-const grossIncome = 10000; //prompt("Enter Your Gros salary");
+const grossIncome = prompt("Enter Your Gros salary");
 
 //Netsalary calculator,calculates the netSalary of an individual ,recieves 4 parameter which are function we passed to it,
 
